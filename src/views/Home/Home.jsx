@@ -1,38 +1,30 @@
-import React, { PureComponent } from 'react';
-import moment from 'moment';
-import { DatePicker } from 'antd';
+import React from 'react';
+import { Row, Col, Divider } from 'antd';
 
-class Home extends PureComponent {
-  constructor(props) {
-    super(props);
+import HomeForm from '../../containers/HomeForm/index';
 
-    this.state = {
-      date: moment().locale('pl'),
-    };
-    this.handleDateChange = this.handleDateChange.bind(this);
-  }
-
-  handleDateChange = date => {
-    this.setState({ date });
-  };
-
-  render() {
-    return (
-      <div>
-        <h1>Find your next experience</h1>
-        <form>
-          <input type="text" placeholder="Search events" />
-          <input type="text" placeholder="City" />
-          <DatePicker
-            value={this.state.date}
-            format={'YYYY/MM/DD'}
-            onChange={this.handleDateChange}
-          />
-          <button>Search</button>
-        </form>
-      </div>
-    );
-  }
-}
+const Home = () => (
+  <div>
+    <Row>
+      <Divider>
+        <h1 style={{ textAlign: 'center' }}>Find your next experience</h1>
+      </Divider>
+      <Col
+        xs={24}
+        sm={{ span: 16, offset: 4 }}
+        lg={{ span: 12, offset: 6 }}
+        xl={{ span: 8, offset: 8 }}
+        xxl={{ span: 4, offset: 10 }}
+      >
+        <HomeForm />
+      </Col>
+    </Row>
+    <Row>
+      <Divider>
+        <h2 style={{ textAlign: 'center' }}>Featured events</h2>
+      </Divider>
+    </Row>
+  </div>
+);
 
 export default Home;

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Layout, Menu, Icon } from 'antd';
 
 const { Header } = Layout;
+const { Item } = Menu;
 
 class MainMenu extends PureComponent {
   state = {
@@ -25,8 +26,6 @@ class MainMenu extends PureComponent {
   }
 
   render() {
-    const { Item } = Menu;
-
     return (
       <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
         <Menu

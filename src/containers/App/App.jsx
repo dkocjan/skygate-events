@@ -11,8 +11,8 @@ import indexRoutes from '../../routes';
 import './styles.css';
 
 // Components
-import MainMenu from '../../components/MainMenu';
-import SiteFooter from '../../components/Footer';
+import MainMenu from '../MainMenu/index';
+import SiteFooter from '../../components/SiteFooter';
 
 const { Content } = Layout;
 
@@ -25,11 +25,11 @@ const App = () => (
           <Content style={{ padding: '0 50px', marginTop: 64 }}>
             <TransitionGroup>
               <CSSTransition
-                timeout={300}
+                timeout={200}
                 classNames="slide"
-                transitionAppearTimeout={600}
-                transitionEnterTimeout={600}
-                transitionExitTimeout={200}
+                transitionAppearTimeout={200}
+                transitionEnterTimeout={200}
+                transitionExitTimeout={50}
                 unmountOnExit
                 key={location.key}
               >
