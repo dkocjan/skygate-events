@@ -16,3 +16,4 @@ Recruitment task for Skygate
 * [Moment](https://github.com/moment/moment) for date manipulation
 * [Jest](https://github.com/facebook/jest) for testing
 * [Firebase](https://www.npmjs.com/package/firebase) for database 🔥
+* [Ant Design](https://ant.design/) for UI
