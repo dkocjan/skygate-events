@@ -10,22 +10,14 @@ class Home extends PureComponent {
 
     this.state = {
       searchTerm: '',
-      localization: '',
-      date: moment().locale('pl'),
+      location: '',
+      date: moment(),
     };
-
-    this.handleDateChange = this.handleDateChange.bind(this);
-    this.handleSearchInputChange = this.handleSearchInputChange.bind(this);
   }
 
-  handleSearchInputChange = e => {
-    const searchTerm = e.target.value;
-    this.setState({ searchTerm });
-  };
-
-  handleLocalizationInputChange = e => {
-    const localization = e.target.value;
-    this.setState({ localization });
+  handleInputChange = e => {
+    const data = e.target.attributes.data.value;
+    this.setState({ [data]: e.target.value });
   };
 
   handleDateChange = date => {
@@ -34,40 +26,50 @@ class Home extends PureComponent {
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log('submit');
   };
 
   render() {
-    const state = this.state;
+    const { state } = this;
     return (
       <Form layout="vertical" onSubmit={this.handleSubmit}>
         <FormItem label="Event">
           <Input
             autoFocus
+            size="large"
             type="text"
             placeholder="Search events"
+            data="searchTerm"
             value={state.searchTerm}
-            onChange={this.handleSearchInputChange}
+            onChange={this.handleInputChange}
           />
         </FormItem>
-        <FormItem label="Localization">
+        <FormItem label="Location">
           <Input
+            size="large"
             type="text"
             placeholder="City"
-            value={state.localization}
-            onChange={this.handleLocalizationInputChange}
+            data="location"
+            value={state.location}
+            onChange={this.handleInputChange}
           />
         </FormItem>
         <FormItem label="Date">
           <DatePicker
+            size="large"
             style={{ width: `${100}%` }}
+            data="date"
             value={this.state.date}
             format={'YYYY/MM/DD'}
             onChange={this.handleDateChange}
           />
         </FormItem>
         <FormItem>
-          <Button type="primary" htmlType="submit" style={{ width: `${100}%` }}>
+          <Button
+            type="primary"
+            size="large"
+            htmlType="submit"
+            style={{ width: `${100}%` }}
+          >
             <Icon type="search" />Search
           </Button>
         </FormItem>

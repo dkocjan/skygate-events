@@ -11,10 +11,9 @@ const Home = () => (
       </Divider>
       <Col
         xs={24}
-        sm={{ span: 16, offset: 4 }}
-        lg={{ span: 12, offset: 6 }}
-        xl={{ span: 8, offset: 8 }}
-        xxl={{ span: 4, offset: 10 }}
+        sm={{ span: 18, offset: 3 }}
+        lg={{ span: 16, offset: 4 }}
+        xl={{ span: 12, offset: 6 }}
       >
         <HomeForm />
       </Col>

@@ -41,13 +41,13 @@ class MainMenu extends PureComponent {
           </Item>
           <Item key="/events">
             <Link to="/events">
-              <Icon type="schedule" />
+              <Icon type="team" />
               <span className="nav-text">Browse</span>
             </Link>
           </Item>
           <Item key="/create">
             <Link to="/create">
-              <Icon type="file-text" />
+              <Icon type="form" />
               <span className="nav-text">Create</span>
             </Link>
           </Item>
