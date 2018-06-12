@@ -1,13 +1,15 @@
 import React from 'react';
 import { Row, Col, Divider } from 'antd';
 
+import Hero from '../../components/Hero';
 import HomeForm from '../../containers/HomeForm/index';
 
 const Home = () => (
   <div>
     <Row>
+      <Hero />
       <Divider>
-        <h1 style={{ textAlign: 'center' }}>Find your next experience</h1>
+        <h2 style={{ textAlign: 'center' }}>Search for your dream event</h2>
       </Divider>
       <Col
         xs={24}
