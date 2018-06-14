@@ -25,3 +25,8 @@
   position: absolute;
   top: 64px;
 }
+
+/* Hide horizontal scroll in route transitions */
+body {
+  overflow-x: hidden;
+}

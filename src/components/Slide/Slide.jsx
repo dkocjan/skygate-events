@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './slide.css';
+import './Slide.css';
 
 const Slide = ({ img, text, description }) => (
   <div style={{ backgroundImage: `url('${img}')` }} className="slide">

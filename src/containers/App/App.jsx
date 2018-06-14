@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import 'antd/dist/antd.css';
-import { Layout, Icon } from 'antd';
+import { Layout } from 'antd';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+
+// Styles for App
+import './App.css';
+
+// Styles for route transitions
+import './transitions.css';
 
 // Routes
 import indexRoutes from '../../routes';
 
-// Styles for route transitions
-import './styles.css';
-
-// Components
+// Views & Components
+import PageNotFound from '../../views/PageNotFound';
 import MainMenu from '../MainMenu/index';
 import SiteFooter from '../../components/SiteFooter';
 
@@ -32,7 +36,7 @@ class App extends Component {
           render={({ location }) => (
             <Layout>
               <MainMenu location={location} />
-              <Content style={{ padding: '0 50px', marginTop: 64 }}>
+              <Content className="app__content">
                 <TransitionGroup>
                   <CSSTransition
                     timeout={200}
@@ -43,7 +47,7 @@ class App extends Component {
                     unmountOnExit
                     key={location.key}
                   >
-                    <Switch location={location}>
+                    <Switch onUpdate={() => window.scrollTo(0, 0)}>
                       {indexRoutes.map(prop => (
                         <Route
                           exact
@@ -53,11 +57,7 @@ class App extends Component {
                         />
                       ))}
                       <Route
-                        render={() => (
-                          <h1>
-                            Page not found <Icon type="frown-o" />
-                          </h1>
-                        )}
+                        render={() => <PageNotFound location={location} />}
                       />
                     </Switch>
                   </CSSTransition>

@@ -17,3 +17,4 @@ Recruitment task for Skygate
 * [Jest](https://github.com/facebook/jest) for testing
 * [Firebase](https://www.npmjs.com/package/firebase) for database 🔥
 * [Ant Design](https://ant.design/) for UI
+* [react-transition-group](https://github.com/reactjs/react-transition-group) for transitions
