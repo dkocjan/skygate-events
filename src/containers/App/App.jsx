@@ -27,7 +27,13 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      categories: [],
+      categories: [
+        'Music',
+        'Sports',
+        'Science & Tech',
+        'Software Development',
+        'Party',
+      ],
       events: [],
     };
   }

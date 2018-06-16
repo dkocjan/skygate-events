@@ -1,6 +1,16 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import moment from 'moment';
-import { Form, Input, DatePicker, Button, Upload, Modal, message } from 'antd';
+import {
+  Form,
+  Input,
+  Select,
+  DatePicker,
+  Button,
+  Upload,
+  Modal,
+  message,
+} from 'antd';
 
 import UploadButton from '../../components/UploadButton';
 
@@ -24,6 +34,7 @@ function beforeUpload(file) {
 
 const FormItem = Form.Item;
 const TextArea = Input.TextArea;
+const Option = Select.Option;
 
 class CreateEventForm extends PureComponent {
   constructor(props) {
@@ -44,8 +55,14 @@ class CreateEventForm extends PureComponent {
   }
 
   handleInputChange = e => {
-    const data = e.target.attributes.data.value;
-    this.setState({ [data]: e.target.value });
+    if (e.target) {
+      const data = e.target.attributes.data.value;
+      this.setState({ [data]: e.target.value });
+    }
+  };
+
+  handleCategoryChange = category => {
+    this.setState({ category });
   };
 
   handleDateChange = date => {
@@ -101,16 +118,14 @@ class CreateEventForm extends PureComponent {
       description,
       date,
       location,
-      organization,
-      // category,
       imgPreview,
       imgPreviewVisible,
       img,
     } = this.state;
 
     return (
-      <Form onSubmit={this.handleSubmit}>
-        <FormItem label="Title">
+      <Form onSubmit={this.handleSubmit} hideRequiredMark>
+        <FormItem label="Title" required>
           <Input
             autoFocus
             type="text"
@@ -120,7 +135,7 @@ class CreateEventForm extends PureComponent {
             onChange={this.handleInputChange}
           />
         </FormItem>
-        <FormItem label="Description">
+        <FormItem label="Description" required>
           <TextArea
             autosize
             type="textarea"
@@ -130,7 +145,19 @@ class CreateEventForm extends PureComponent {
             onChange={this.handleInputChange}
           />
         </FormItem>
-        <FormItem label="Date">
+        <FormItem label="Category" required>
+          <Select
+            placeholder="Select a category"
+            onChange={this.handleCategoryChange}
+          >
+            {this.props.categories.map(cat => (
+              <Option value={cat} key={cat}>
+                {cat}
+              </Option>
+            ))}
+          </Select>
+        </FormItem>
+        <FormItem label="Date" required>
           <DatePicker
             style={{ width: `${100}%` }}
             data="date"
@@ -139,21 +166,12 @@ class CreateEventForm extends PureComponent {
             onChange={this.handleDateChange}
           />
         </FormItem>
-        <FormItem label="Location">
+        <FormItem label="Location" required>
           <Input
             type="text"
             placeholder="Location of event"
             data="location"
             value={location}
-            onChange={this.handleInputChange}
-          />
-        </FormItem>
-        <FormItem label="Organization">
-          <Input
-            type="organization"
-            placeholder="Organizing company name"
-            data="organization"
-            value={organization}
             onChange={this.handleInputChange}
           />
         </FormItem>
@@ -196,5 +214,19 @@ class CreateEventForm extends PureComponent {
     );
   }
 }
+
+CreateEventForm.propTypes = {
+  categories: PropTypes.arrayOf(PropTypes.string),
+};
+
+CreateEventForm.defaultProps = {
+  categories: [
+    'Music',
+    'Sports',
+    'Science & Tech',
+    'Software Development',
+    'Party',
+  ],
+};
 
 export default CreateEventForm;

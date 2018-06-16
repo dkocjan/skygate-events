@@ -10,7 +10,7 @@ const CreateEvent = () => (
         <h1 style={{ textAlign: 'center' }}>Create Event</h1>
       </Divider>
       <Col
-        xs={24}
+        xs={{ span: 22, offset: 1 }}
         sm={{ span: 18, offset: 3 }}
         lg={{ span: 16, offset: 4 }}
         xl={{ span: 12, offset: 6 }}

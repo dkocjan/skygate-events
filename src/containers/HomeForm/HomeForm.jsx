@@ -4,7 +4,7 @@ import { Form, Input, DatePicker, Button } from 'antd';
 
 const FormItem = Form.Item;
 
-class Home extends PureComponent {
+class HomeForm extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -79,4 +79,4 @@ class Home extends PureComponent {
   }
 }
 
-export default Home;
+export default HomeForm;
