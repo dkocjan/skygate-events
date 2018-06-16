@@ -1,15 +1,6 @@
 import React, { PureComponent } from 'react';
 import moment from 'moment';
-import {
-  Form,
-  Input,
-  DatePicker,
-  Button,
-  Icon,
-  Upload,
-  Modal,
-  message,
-} from 'antd';
+import { Form, Input, DatePicker, Button, Upload, Modal, message } from 'antd';
 
 import UploadButton from '../../components/UploadButton';
 
@@ -192,8 +183,13 @@ class CreateEventForm extends PureComponent {
           </Modal>
         </FormItem>
         <FormItem>
-          <Button type="primary" htmlType="submit" style={{ width: `${100}%` }}>
-            <Icon type="check" />Submit
+          <Button
+            type="primary"
+            htmlType="submit"
+            icon="check"
+            style={{ width: `${100}%` }}
+          >
+            Submit
           </Button>
         </FormItem>
       </Form>

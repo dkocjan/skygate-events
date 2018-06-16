@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import moment from 'moment';
-import { Form, Input, DatePicker, Button, Icon } from 'antd';
+import { Form, Input, DatePicker, Button } from 'antd';
 
 const FormItem = Form.Item;
 
@@ -69,8 +69,9 @@ class Home extends PureComponent {
             size="large"
             htmlType="submit"
             style={{ width: `${100}%` }}
+            icon="search"
           >
-            <Icon type="search" />Search
+            Search
           </Button>
         </FormItem>
       </Form>

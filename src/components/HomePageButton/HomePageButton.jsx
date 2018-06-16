@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Icon } from 'antd';
+import { Button } from 'antd';
 
 class HomePageButton extends PureComponent {
   redirectToHomePage = e => {
@@ -14,8 +14,13 @@ class HomePageButton extends PureComponent {
 
   render() {
     return (
-      <Button type="primary" size="large" onClick={this.redirectToHomePage}>
-        <Icon type="home" />
+      <Button
+        type="primary"
+        size="large"
+        onClick={this.redirectToHomePage}
+        icon="home"
+        htmlType="button"
+      >
         {this.props.buttonText}
       </Button>
     );
