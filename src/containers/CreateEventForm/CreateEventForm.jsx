@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import moment from 'moment';
 import {
   Form,
@@ -12,6 +11,7 @@ import {
   message,
 } from 'antd';
 
+import { Consumer } from '../Store';
 import UploadButton from '../../components/UploadButton';
 
 const getBase64 = (img, callback) => {
@@ -41,7 +41,7 @@ class CreateEventForm extends PureComponent {
     super(props);
 
     this.state = {
-      title: '',
+      name: '',
       description: '',
       date: moment(),
       location: '',
@@ -114,7 +114,7 @@ class CreateEventForm extends PureComponent {
 
   render() {
     const {
-      title,
+      name,
       description,
       date,
       location,
@@ -125,13 +125,13 @@ class CreateEventForm extends PureComponent {
 
     return (
       <Form onSubmit={this.handleSubmit} hideRequiredMark>
-        <FormItem label="Title" required>
+        <FormItem label="Name" required>
           <Input
             autoFocus
             type="text"
-            placeholder="Event's title"
-            data="title"
-            value={title}
+            placeholder="Event's name"
+            data="name"
+            value={name}
             onChange={this.handleInputChange}
           />
         </FormItem>
@@ -146,16 +146,20 @@ class CreateEventForm extends PureComponent {
           />
         </FormItem>
         <FormItem label="Category" required>
-          <Select
-            placeholder="Select a category"
-            onChange={this.handleCategoryChange}
-          >
-            {this.props.categories.map(cat => (
-              <Option value={cat} key={cat}>
-                {cat}
-              </Option>
-            ))}
-          </Select>
+          <Consumer>
+            {({ categories }) => (
+              <Select
+                placeholder="Select a category"
+                onChange={this.handleCategoryChange}
+              >
+                {categories.map(cat => (
+                  <Option value={cat} key={cat}>
+                    {cat}
+                  </Option>
+                ))}
+              </Select>
+            )}
+          </Consumer>
         </FormItem>
         <FormItem label="Date" required>
           <DatePicker
@@ -214,19 +218,5 @@ class CreateEventForm extends PureComponent {
     );
   }
 }
-
-CreateEventForm.propTypes = {
-  categories: PropTypes.arrayOf(PropTypes.string),
-};
-
-CreateEventForm.defaultProps = {
-  categories: [
-    'Music',
-    'Sports',
-    'Science & Tech',
-    'Software Development',
-    'Party',
-  ],
-};
 
 export default CreateEventForm;

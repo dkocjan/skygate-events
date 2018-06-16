@@ -9,7 +9,7 @@ const Home = () => (
     <Row>
       <Hero />
       <Divider>
-        <h2 style={{ textAlign: 'center' }}>Search for your dream event</h2>
+        <h2>Search for your dream event</h2>
       </Divider>
       <Col
         xs={{ span: 22, offset: 1 }}
@@ -22,7 +22,7 @@ const Home = () => (
     </Row>
     <Row>
       <Divider>
-        <h2 style={{ textAlign: 'center' }}>Featured events</h2>
+        <h2>Upcoming events</h2>
       </Divider>
     </Row>
   </div>
