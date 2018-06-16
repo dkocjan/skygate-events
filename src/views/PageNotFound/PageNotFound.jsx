@@ -1,40 +1,41 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Icon, Button } from 'antd';
+import { Row, Col, Icon } from 'antd';
+
+import HomePageButton from '../../components/HomePageButton';
 
 class PageNotFound extends PureComponent {
-  redirectToHomePage = e => {
-    e.preventDefault();
-
-    const {
-      location: { pathname },
-    } = this.props;
-    const url = window.location.href;
-
-    window.location = url.substring(0, url.length - pathname.length);
-  };
-
   render() {
+    const pathname = this.props.location.pathname;
     return (
-      <div style={{ textAlign: 'center' }}>
-        <h1>
-          That page doesn{`'`}t exist <Icon type="frown-o" />
-        </h1>
-        <p>
-          <Button type="primary" size="large" onClick={this.redirectToHomePage}>
-            <Icon type="home" />
-            Go back to homepage
-          </Button>
-        </p>
-      </div>
+      <Row
+        type="flex"
+        justify="space-around"
+        align="middle"
+        style={{ textAlign: 'center', height: '100vh' }}
+      >
+        <Col>
+          <h1>
+            {this.props.pageNotFoundText} <Icon type="frown-o" />
+          </h1>
+          <p>
+            <HomePageButton pathname={pathname} />
+          </p>
+        </Col>
+      </Row>
     );
   }
 }
 
 PageNotFound.propTypes = {
+  pageNotFoundText: PropTypes.string,
   location: PropTypes.shape({
     pathname: PropTypes.string,
   }).isRequired,
+};
+
+PageNotFound.defaultProps = {
+  pageNotFoundText: `That page doesn't exist`,
 };
 
 export default PageNotFound;
