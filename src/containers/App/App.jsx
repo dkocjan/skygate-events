@@ -3,6 +3,9 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import 'antd/dist/antd.css';
 import { Layout } from 'antd';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import ScrollMemory from 'react-router-scroll-memory';
+// react-router-scroll-memory remembers scroll position in browser history
+// and scrolls to top when route changes
 
 // Styles for App
 import './App.css';
@@ -34,37 +37,40 @@ class App extends Component {
       <Router>
         <Route
           render={({ location }) => (
-            <Layout>
-              <MainMenu location={location} />
-              <Content className="app__content">
-                <TransitionGroup>
-                  <CSSTransition
-                    timeout={200}
-                    classNames="slide"
-                    transitionAppearTimeout={200}
-                    transitionEnterTimeout={200}
-                    transitionExitTimeout={50}
-                    unmountOnExit
-                    key={location.key}
-                  >
-                    <Switch onUpdate={() => window.scrollTo(0, 0)}>
-                      {indexRoutes.map(prop => (
+            <div>
+              <ScrollMemory />
+              <Layout>
+                <MainMenu location={location} />
+                <Content className="app__content">
+                  <TransitionGroup>
+                    <CSSTransition
+                      timeout={200}
+                      classNames="slide"
+                      transitionAppearTimeout={200}
+                      transitionEnterTimeout={200}
+                      transitionExitTimeout={50}
+                      unmountOnExit
+                      key={location.key}
+                    >
+                      <Switch>
+                        {indexRoutes.map(prop => (
+                          <Route
+                            exact
+                            path={prop.path}
+                            component={prop.component}
+                            key={prop.name}
+                          />
+                        ))}
                         <Route
-                          exact
-                          path={prop.path}
-                          component={prop.component}
-                          key={prop.name}
+                          render={() => <PageNotFound location={location} />}
                         />
-                      ))}
-                      <Route
-                        render={() => <PageNotFound location={location} />}
-                      />
-                    </Switch>
-                  </CSSTransition>
-                </TransitionGroup>
-              </Content>
-              <SiteFooter />
-            </Layout>
+                      </Switch>
+                    </CSSTransition>
+                  </TransitionGroup>
+                </Content>
+                <SiteFooter />
+              </Layout>
+            </div>
           )}
         />
       </Router>
