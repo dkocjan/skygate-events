@@ -1,0 +1,6 @@
+.hero__carousel {
+  -webkit-box-shadow: 0 -25px 75px 25px rgba(0, 21, 41, .5);
+  -moz-box-shadow: 0 -25px 75px 25px rgba(0, 21, 41, .5);
+  box-shadow: 0 -25px 75px 25px rgba(0, 21, 41, .5);
+  margin-bottom: 50px;
+}

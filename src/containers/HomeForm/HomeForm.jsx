@@ -72,7 +72,7 @@ class HomeForm extends PureComponent {
             style={{ width: `${100}%` }}
             data="date"
             value={date}
-            format={'YYYY/MM/DD'}
+            format="DD.MM.YYYY"
             onChange={this.handleDateChange}
           />
         </FormItem>

@@ -4,6 +4,7 @@
   "dependencies": {
     "antd": "^3.6.1",
     "autoprefixer": "7.1.6",
+    "axios": "^0.18.0",
     "babel-core": "6.26.0",
     "babel-eslint": "7.2.3",
     "babel-jest": "20.0.3",
@@ -30,6 +31,7 @@
     "file-loader": "1.1.5",
     "firebase": "^5.0.4",
     "fs-extra": "3.0.1",
+    "google-map-react": "^1.0.4",
     "html-webpack-plugin": "2.29.0",
     "jest": "20.0.4",
     "moment": "^2.22.2",
@@ -43,7 +45,7 @@
     "react": "^16.4.0",
     "react-dev-utils": "^5.0.1",
     "react-dom": "^16.4.0",
-    "react-google-maps": "^9.4.5",
+    "react-moment-proptypes": "^1.6.0",
     "react-router-dom": "^4.2.2",
     "react-transition-group": "^2.3.1",
     "resolve": "1.6.0",
@@ -98,5 +100,6 @@
     "presets": [
       "react-app"
     ]
-  }
+  },
+  "proxy": "http://localhost:3000"
 }

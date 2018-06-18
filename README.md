@@ -45,3 +45,4 @@ Recruitment task for Skygate
   * google maps with localization
   * range indicator that shows how far is event from you (localization access prompt)
 * `MainMenu` responsiveness
+* Rework `CreateEventForm` image uploading process, now doesn't work well for large images (1MB or more)

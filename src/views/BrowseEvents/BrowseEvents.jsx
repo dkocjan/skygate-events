@@ -1,19 +1,13 @@
 import React from 'react';
 import { Divider } from 'antd';
-import { Consumer } from '../../store';
+import EventsList from '../../components/EventsList';
 
 const BrowseEvents = () => (
   <div>
     <Divider>
-      <h1>BrowseEvents</h1>
+      <h1>Browse Events</h1>
     </Divider>
-    <Consumer>
-      {({ events }) =>
-        events.map(event => (
-          <div key={event.id || event.date || event.name}>{event.name}</div>
-        ))
-      }
-    </Consumer>
+    <EventsList />
   </div>
 );
 

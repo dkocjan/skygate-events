@@ -6,7 +6,7 @@ const Slide = ({ img, text, description }) => (
   <div style={{ backgroundImage: `url('${img}')` }} className="slide">
     <div className="slide__text-wrapper">
       <h1 className="slide__heading">{text}</h1>
-      <p className="slide__description">{description}</p>
+      {description ? <p className="slide__description">{description}</p> : null}
     </div>
     <div className="slide__overlay" />
   </div>

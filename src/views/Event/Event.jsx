@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Row, Col, Icon } from 'antd';
 
 import { Consumer } from '../../store';
+import EventDetails from '../../containers/EventDetails';
 
 class Event extends PureComponent {
   constructor(props) {
@@ -11,8 +12,6 @@ class Event extends PureComponent {
   }
 
   render() {
-    const { id } = this.props.match.params;
-
     const EventNotFound = ({ notFoundId }) => (
       <Row
         type="flex"
@@ -28,15 +27,17 @@ class Event extends PureComponent {
       </Row>
     );
 
+    const { id } = this.props.match.params;
     return (
       <Consumer>
-        {({ events }) =>
-          events[id] ? (
-            <div>{events[id].name}</div>
+        {({ events }) => {
+          const index = events.findIndex(event => event.id === id);
+          return index !== -1 ? (
+            <EventDetails event={events[index]} />
           ) : (
             <EventNotFound notFoundId={id} />
-          )
-        }
+          );
+        }}
       </Consumer>
     );
   }

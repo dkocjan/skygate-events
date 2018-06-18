@@ -1,5 +1,6 @@
 import React, { Component, createContext } from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 
 const StoreContext = createContext();
 
@@ -16,22 +17,76 @@ class Store extends Component {
       ],
       events: [
         {
-          id: 0,
-          name: 'Concert',
-          description: 'Desc.......',
-          location: 'Location',
-          date: 'Date',
-          category: 'Music',
-          img: '',
+          id: '0',
+          name: 'Skygate React Workshops',
+          description: 'lorem ipsum',
+          date: '2018-07-13',
+          location: 'Gliwice',
+          category: 'Software Development',
+          img: 'https://placeimg.com/640/480/tech',
         },
         {
-          id: 1,
-          name: 'React workshops',
-          description: 'Skygate React workshops',
+          id: '1',
+          name: 'Test party',
+          description: 'lorem ipsum',
+          date: '2018-06-23',
+          location: 'Katowice',
+          category: 'Party',
+          img: 'https://placeimg.com/640/480/animals',
+        },
+        {
+          id: '2',
+          name: 'Test music',
+          description: 'lorem ipsum',
+          date: '2018-06-29',
+          location: 'Kraków',
+          category: 'Music',
+          img: 'https://placeimg.com/640/480/animals',
+        },
+        {
+          id: '3',
+          name: 'Test science & tech',
+          description: 'lorem ipsum',
+          date: '2018-07-05',
+          location: 'Szczecin',
+          category: 'Science & Tech',
+          img: 'https://placeimg.com/640/480/animals',
+        },
+        {
+          id: '4',
+          name: '2018 FIFA World Cup Final',
+          description: 'lorem ipsum',
+          date: '2018-07-15',
+          location: 'Moscow',
+          category: 'Sports',
+          img: 'https://placeimg.com/640/480/animals',
+        },
+        {
+          id: '5',
+          name: 'New Years Eve',
+          description: '2019',
+          date: '2018-12-31',
+          location: '',
+          category: 'Party',
+          img: 'https://placeimg.com/640/480/animals',
+        },
+        {
+          id: '6',
+          name: 'Another test party',
+          description: 'lorem ipsum',
+          date: '2018-06-24',
+          location: 'Poznań',
+          category: 'Party',
+          img: 'https://placeimg.com/640/480/animals',
+        },
+        {
+          id: '7',
+          name: 'Skygate Internship 2018',
+          description: 'Gliwice',
+          date: '2018-07-02',
           location: 'Gliwice',
-          date: 'Date',
           category: 'Software Development',
-          img: '',
+          img: 'https://placeimg.com/640/480/animals',
         },
       ],
       locationDataSource: [
@@ -49,9 +104,12 @@ class Store extends Component {
     };
   }
 
-  createNewEvent = event => {
+  createEvent = event => {
+    const newEvent = event;
+    newEvent.id = Math.floor(Math.random() * 1000000).toString();
+    newEvent.date = moment(event.date).format('YYYY-MM-DD');
     this.setState(prevState => ({
-      events: [...prevState.events, event],
+      events: [...prevState.events, newEvent],
     }));
   };
 
@@ -60,7 +118,7 @@ class Store extends Component {
     const { categories, events, locationDataSource } = this.state;
 
     // actions
-    const { createNewEvent } = this;
+    const { createEvent } = this;
 
     return (
       <StoreContext.Provider
@@ -71,7 +129,7 @@ class Store extends Component {
           locationDataSource,
 
           // actions
-          createNewEvent,
+          createEvent,
         }}
       >
         {this.props.children}

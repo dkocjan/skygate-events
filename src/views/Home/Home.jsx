@@ -13,7 +13,7 @@ const Home = () => (
       </Divider>
       <Col
         xs={{ span: 22, offset: 1 }}
-        sm={{ span: 18, offset: 3 }}
+        sm={{ span: 20, offset: 2 }}
         lg={{ span: 16, offset: 4 }}
         xl={{ span: 12, offset: 6 }}
       >

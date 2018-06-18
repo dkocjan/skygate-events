@@ -22,7 +22,7 @@ const getBase64 = (img, callback) => {
   reader.readAsDataURL(img);
 };
 
-function beforeUpload(file) {
+const beforeUpload = file => {
   const isJPG = file.type === 'image/jpeg';
   if (!isJPG) {
     message.error('You can only upload JPG file!');
@@ -32,7 +32,9 @@ function beforeUpload(file) {
     message.error('Image must smaller than 1MB!');
   }
   return isJPG && isLt2M;
-}
+};
+
+const disabledDate = current => current && current < moment().add(-1, 'days');
 
 const FormItem = Form.Item;
 const TextArea = Input.TextArea;
@@ -48,7 +50,7 @@ class CreateEventForm extends PureComponent {
       date: moment(),
       location: '',
       category: '',
-      img: null,
+      img: '',
       imgPreview: '',
       imgPreviewVisible: false,
       imgLoading: false,
@@ -77,6 +79,7 @@ class CreateEventForm extends PureComponent {
   };
 
   handleImageChange = e => {
+    this.setState({ img: '' });
     getBase64(e.file.originFileObj, url =>
       this.setState({
         img: url,
@@ -96,7 +99,12 @@ class CreateEventForm extends PureComponent {
   };
 
   handleImageRemove = () => {
-    this.setState({ img: null });
+    this.setState({
+      img: '',
+      imgPreview: '',
+      imgPreviewVisible: false,
+      imgLoading: false,
+    });
   };
 
   handleSubmit = e => {
@@ -116,11 +124,11 @@ class CreateEventForm extends PureComponent {
 
     return (
       <Consumer>
-        {({ categories, createNewEvent, locationDataSource }) => (
+        {({ categories, createEvent, locationDataSource }) => (
           <Form
             onSubmit={e => {
               this.handleSubmit(e);
-              createNewEvent(this.state);
+              createEvent(this.state);
             }}
           >
             <FormItem label="Name" required>
@@ -128,7 +136,7 @@ class CreateEventForm extends PureComponent {
                 required
                 autoFocus
                 type="text"
-                placeholder="Event's name"
+                placeholder="Event name"
                 data="name"
                 value={name}
                 onChange={this.handleInputChange}
@@ -157,12 +165,15 @@ class CreateEventForm extends PureComponent {
                 ))}
               </Select>
             </FormItem>
-            <FormItem label="Date">
+            <FormItem label="Date" required>
               <DatePicker
+                placeholder="Event date"
+                format="DD.MM.YYYY"
+                disabledDate={disabledDate}
+                allowClear={false}
                 style={{ width: `${100}%` }}
                 data="date"
                 value={date}
-                format={'YYYY/MM/DD'}
                 onChange={this.handleDateChange}
               />
             </FormItem>
@@ -177,8 +188,12 @@ class CreateEventForm extends PureComponent {
                 onChange={this.handleLocationChange}
               />
             </FormItem>
-            <FormItem label="Image" className="clearfix">
+            <FormItem
+              label={`Image (Please add as small image as possible - up to 1MB. This is under construction 😞)`}
+              className="clearfix"
+            >
               <Upload
+                style={{ width: '240px' }}
                 name="image"
                 listType="picture-card"
                 accept=".jpg"
@@ -187,7 +202,7 @@ class CreateEventForm extends PureComponent {
                 onChange={this.handleImageChange}
                 onRemove={this.handleImageRemove}
               >
-                {img ? '' : <UploadButton />}
+                {this.state.img ? '' : <UploadButton />}
               </Upload>
               <Modal
                 size="large"
