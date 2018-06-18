@@ -2,10 +2,10 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import 'antd/dist/antd.css';
 
-import AppLayout from '../../containers/AppLayout';
+import AppLayout from '../AppLayout/index';
 
 // Store
-import Store from '../../containers/Store';
+import Store from '../../store';
 
 const App = () => (
   <Store>

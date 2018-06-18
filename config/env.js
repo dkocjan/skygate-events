@@ -1,5 +1,3 @@
-'use strict';
-
 const fs = require('fs');
 const path = require('path');
 const paths = require('./paths');
@@ -15,14 +13,14 @@ if (!NODE_ENV) {
 }
 
 // https://github.com/bkeepers/dotenv#what-other-env-files-can-i-use
-var dotenvFiles = [
+const dotenvFiles = [
+  paths.dotenv,
   `${paths.dotenv}.${NODE_ENV}.local`,
   `${paths.dotenv}.${NODE_ENV}`,
   // Don't include `.env.local` for `test` environment
   // since normally you expect tests to produce the same
   // results for everyone
   NODE_ENV !== 'test' && `${paths.dotenv}.local`,
-  paths.dotenv,
 ].filter(Boolean);
 
 // Load environment variables from .env* files. Suppress warnings using silent

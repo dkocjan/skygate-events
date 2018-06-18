@@ -1,6 +1,9 @@
 import React, { PureComponent } from 'react';
 import moment from 'moment';
-import { Form, Input, DatePicker, Button } from 'antd';
+import { Form, Input, DatePicker, Button, AutoComplete } from 'antd';
+
+import { Consumer } from '../../store';
+import renderAutocompleteOption from '../../utils/renderAutocompleteOption';
 
 const FormItem = Form.Item;
 
@@ -20,6 +23,10 @@ class HomeForm extends PureComponent {
     this.setState({ [data]: e.target.value });
   };
 
+  handleLocationChange = location => {
+    this.setState({ location });
+  };
+
   handleDateChange = date => {
     this.setState({ date });
   };
@@ -29,7 +36,7 @@ class HomeForm extends PureComponent {
   };
 
   render() {
-    const { state } = this;
+    const { searchTerm, location, date } = this.state;
     return (
       <Form layout="vertical" onSubmit={this.handleSubmit}>
         <FormItem label="Event">
@@ -39,26 +46,32 @@ class HomeForm extends PureComponent {
             type="text"
             placeholder="Search events"
             data="searchTerm"
-            value={state.searchTerm}
+            value={searchTerm}
             onChange={this.handleInputChange}
           />
         </FormItem>
         <FormItem label="Location">
-          <Input
-            size="large"
-            type="text"
-            placeholder="City"
-            data="location"
-            value={state.location}
-            onChange={this.handleInputChange}
-          />
+          <Consumer>
+            {({ locationDataSource }) => (
+              <AutoComplete
+                size="large"
+                placeholder="City"
+                data="location"
+                value={location}
+                backfill
+                dataSource={locationDataSource.map(renderAutocompleteOption)}
+                onChange={this.handleLocationChange}
+              />
+            )}
+          </Consumer>
         </FormItem>
         <FormItem label="Date">
           <DatePicker
+            placeholder="Anytime"
             size="large"
             style={{ width: `${100}%` }}
             data="date"
-            value={this.state.date}
+            value={date}
             format={'YYYY/MM/DD'}
             onChange={this.handleDateChange}
           />

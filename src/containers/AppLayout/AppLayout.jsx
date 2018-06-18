@@ -47,7 +47,11 @@ class AppLayout extends Component {
                     key={prop.name}
                   />
                 ))}
-                <Route render={() => <PageNotFound location={location} />} />
+                <Route
+                  render={() => (
+                    <PageNotFound pathname={this.props.location.pathname} />
+                  )}
+                />
               </Switch>
             </CSSTransition>
           </TransitionGroup>

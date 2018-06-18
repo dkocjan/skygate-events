@@ -6,7 +6,7 @@ import HomePageButton from '../../components/HomePageButton';
 
 class PageNotFound extends PureComponent {
   render() {
-    const pathname = this.props.location.pathname;
+    const { pageNotFoundText, pathname } = this.props;
     return (
       <Row
         type="flex"
@@ -16,7 +16,7 @@ class PageNotFound extends PureComponent {
       >
         <Col>
           <h1>
-            {this.props.pageNotFoundText} <Icon type="frown-o" />
+            {pageNotFoundText} <Icon type="frown-o" />
           </h1>
           <p>
             <HomePageButton pathname={pathname} />
@@ -29,9 +29,7 @@ class PageNotFound extends PureComponent {
 
 PageNotFound.propTypes = {
   pageNotFoundText: PropTypes.string,
-  location: PropTypes.shape({
-    pathname: PropTypes.string,
-  }).isRequired,
+  pathname: PropTypes.string.isRequired,
 };
 
 PageNotFound.defaultProps = {
