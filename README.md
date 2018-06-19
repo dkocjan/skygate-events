@@ -11,9 +11,7 @@ Recruitment task for Skygate
     * Create `.env` file in root directory that should look like:
       ```
       REACT_APP_GOOGLE=googleApiKey
-      REACT_APP_FIREBASE=firebaseApiKey
       ```
-    * Change the rest of the Firebase config in `src/config/firebase.js` according to your application data
 2. `npm install` - install dependencies
 3. `npm start` - run development server
 4. `npm test` - run tests

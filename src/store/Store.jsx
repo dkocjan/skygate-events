@@ -2,6 +2,8 @@ import React, { Component, createContext } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 
+import dummyData from './dummyData';
+
 const StoreContext = createContext();
 
 class Store extends Component {
@@ -15,80 +17,7 @@ class Store extends Component {
         'Software Development',
         'Party',
       ],
-      events: [
-        {
-          id: '0',
-          name: 'Skygate React Workshops',
-          description: 'lorem ipsum',
-          date: '2018-07-13',
-          location: 'Gliwice, Rynek 6',
-          category: 'Software Development',
-          img: 'https://placeimg.com/640/480/tech',
-        },
-        {
-          id: '1',
-          name: 'Test party',
-          description: 'lorem ipsum',
-          date: '2018-06-23',
-          location: 'Katowice',
-          category: 'Party',
-          img: 'https://placeimg.com/640/480/animals',
-        },
-        {
-          id: '2',
-          name: 'Test music',
-          description: 'lorem ipsum',
-          date: '2018-06-29',
-          location: 'Kraków',
-          category: 'Music',
-          img: 'https://placeimg.com/640/480/animals',
-        },
-        {
-          id: '3',
-          name: 'Test science & tech',
-          description: 'lorem ipsum',
-          date: '2018-07-05',
-          location: 'Szczecin',
-          category: 'Science & Tech',
-          img: 'https://placeimg.com/640/480/animals',
-        },
-        {
-          id: '4',
-          name: '2018 FIFA World Cup Final',
-          description: 'lorem ipsum',
-          date: '2018-07-15',
-          location: 'Moscow',
-          category: 'Sports',
-          img: 'https://placeimg.com/640/480/animals',
-        },
-        {
-          id: '5',
-          name: 'New Years Eve',
-          description: '2019',
-          date: '2018-12-31',
-          location: '',
-          category: 'Party',
-          img: 'https://placeimg.com/640/480/animals',
-        },
-        {
-          id: '6',
-          name: 'Another test party',
-          description: 'lorem ipsum',
-          date: '2018-06-24',
-          location: 'Poznań',
-          category: 'Party',
-          img: 'https://placeimg.com/640/480/animals',
-        },
-        {
-          id: '7',
-          name: 'Skygate Internship 2018',
-          description: 'Gliwice',
-          date: '2018-07-02',
-          location: 'Gliwice, Rynek 6',
-          category: 'Software Development',
-          img: 'https://placeimg.com/640/480/animals',
-        },
-      ],
+      events: dummyData,
       locationDataSource: [
         'Gliwice',
         'Katowice',
@@ -101,6 +30,7 @@ class Store extends Component {
         'Częstochowa',
         'Szczecin',
       ],
+      filterText: '',
     };
   }
 
@@ -120,12 +50,16 @@ class Store extends Component {
     this.setState({ events: array });
   };
 
+  filterTextChange = e => {
+    this.setState({ filterText: e.target.value });
+  };
+
   render() {
     // data
-    const { categories, events, locationDataSource } = this.state;
+    const { categories, events, locationDataSource, filterText } = this.state;
 
     // actions
-    const { createEvent, deleteEvent } = this;
+    const { createEvent, deleteEvent, filterTextChange } = this;
 
     return (
       <StoreContext.Provider
@@ -134,10 +68,12 @@ class Store extends Component {
           categories,
           events,
           locationDataSource,
+          filterText,
 
           // actions
           createEvent,
           deleteEvent,
+          filterTextChange,
         }}
       >
         {this.props.children}

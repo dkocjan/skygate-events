@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Col, Divider } from 'antd';
+import 'react-placeholder/lib/reactPlaceholder.css';
 
 import Hero from '../../components/Hero';
 import HomeForm from '../../containers/HomeForm/index';
@@ -21,7 +22,7 @@ const Home = () => (
       </Col>
     </Row>
     <Row>
-      <Divider>
+      <Divider style={{ margin: '96px 0' }}>
         <h2>Upcoming events</h2>
       </Divider>
     </Row>

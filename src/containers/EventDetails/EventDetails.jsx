@@ -19,12 +19,10 @@ class EventDetails extends Component {
       ...this.props.event,
       lat: null,
       lng: null,
-      redirect: false,
     };
   }
 
   async componentWillMount() {
-    this.setState({ redirect: false });
     if (this.state.location) {
       const req = await axios.get(`${API_URL}${this.props.event.location}`);
       const pos = req.data.results[0].geometry.location;
@@ -39,7 +37,6 @@ class EventDetails extends Component {
   handleDelete(e) {
     e.preventDefault();
     this.props.history.push('/events');
-    this.setState({ redirect: true });
   }
 
   render() {
@@ -105,7 +102,7 @@ class EventDetails extends Component {
                   }}
                 >
                   {location
-                    ? `See you in ${location} at ${date}! `
+                    ? `See you in ${location} at ${moment(date).format('LL')}! `
                     : `See you ${date}! `}
                 </p>
                 <div

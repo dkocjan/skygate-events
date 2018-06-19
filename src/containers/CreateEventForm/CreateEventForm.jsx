@@ -1,4 +1,6 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import moment from 'moment';
 import {
   Form,
@@ -109,6 +111,7 @@ class CreateEventForm extends PureComponent {
 
   handleSubmit = e => {
     e.preventDefault();
+    this.props.history.push('/events');
   };
 
   render() {
@@ -223,6 +226,7 @@ class CreateEventForm extends PureComponent {
                 htmlType="submit"
                 icon="check"
                 style={{ width: `${100}%` }}
+                disabled={!this.state.name}
               >
                 Submit
               </Button>
@@ -234,4 +238,10 @@ class CreateEventForm extends PureComponent {
   }
 }
 
-export default CreateEventForm;
+CreateEventForm.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};
+
+export default withRouter(CreateEventForm);

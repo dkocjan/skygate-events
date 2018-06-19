@@ -1,4 +1,7 @@
 import React, { PureComponent } from 'react';
+import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
 import {
   Form,
   Input,
@@ -38,6 +41,7 @@ class HomeForm extends PureComponent {
 
   handleSubmit = e => {
     e.preventDefault();
+    this.props.history.push(`/events`);
   };
 
   render() {
@@ -93,7 +97,6 @@ class HomeForm extends PureComponent {
             style={{ width: `${100}%` }}
             icon="search"
             disabled={!this.state.searchTerm}
-            ghost={!this.state.location}
           >
             Search
           </Button>
@@ -103,4 +106,10 @@ class HomeForm extends PureComponent {
   }
 }
 
-export default HomeForm;
+HomeForm.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};
+
+export default withRouter(HomeForm);
