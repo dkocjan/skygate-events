@@ -1,10 +1,9 @@
 import React from 'react';
-import { Row, Col, AutoComplete, Button, Divider, Icon } from 'antd';
+import { Row, Col, AutoComplete, Button, Divider, Icon, Input } from 'antd';
 import { Link } from 'react-router-dom';
 
 import { Consumer } from '../../store';
 import EventCard from '../EventCard';
-import SearchBox from '../SearchBox/SearchBox';
 import renderAutocompleteOption from '../../utils/renderAutocompleteOption';
 
 const EventsList = () => (
@@ -41,9 +40,11 @@ const EventsList = () => (
               lg={{ span: 8 }}
               style={{ margin: '4px 0' }}
             >
-              <SearchBox
-                placeholderText="Search events"
-                onInputChange={filterTextChange}
+              <Input
+                value={filterText}
+                placeholder="Event"
+                onChange={e => filterTextChange(e.target.value)}
+                style={{ width: '100%' }}
               />
             </Col>
             <Col
