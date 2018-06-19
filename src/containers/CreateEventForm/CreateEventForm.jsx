@@ -29,7 +29,7 @@ const beforeUpload = file => {
   if (!isJPG) {
     message.error('You can only upload JPG file!');
   }
-  const isLt2M = file.size / 1024 / 1024 < 1;
+  const isLt2M = file.size / 1024 / 1024 < 5;
   if (!isLt2M) {
     message.error('Image must smaller than 1MB!');
   }
@@ -191,10 +191,7 @@ class CreateEventForm extends PureComponent {
                 onChange={this.handleLocationChange}
               />
             </FormItem>
-            <FormItem
-              label={`Image (Please add as small image as possible - up to 1MB. This is under construction 😞)`}
-              className="clearfix"
-            >
+            <FormItem label="Image" className="clearfix">
               <Upload
                 style={{ width: '240px' }}
                 name="image"
