@@ -26,10 +26,10 @@ class EventMap extends PureComponent {
     return (
       <Row>
         <Col xs={{ span: 24, offset: 0 }}>
-          <div style={{ width: '400px', height: '400px' }}>
+          <div style={{ width: '100%', height: '400px' }}>
             <GoogleMapReact
               bootstrapURLKeys={{ key }}
-              defaultZoom={17}
+              defaultZoom={13}
               defaultCenter={{ lat, lng }}
             >
               <Marker
