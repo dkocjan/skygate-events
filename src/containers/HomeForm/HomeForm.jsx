@@ -1,6 +1,11 @@
 import React, { PureComponent } from 'react';
-import moment from 'moment';
-import { Form, Input, DatePicker, Button, AutoComplete } from 'antd';
+import {
+  Form,
+  Input,
+  // DatePicker,
+  Button,
+  AutoComplete,
+} from 'antd';
 
 import { Consumer } from '../../store';
 import renderAutocompleteOption from '../../utils/renderAutocompleteOption';
@@ -14,7 +19,7 @@ class HomeForm extends PureComponent {
     this.state = {
       searchTerm: '',
       location: '',
-      date: moment(),
+      // date: null,
     };
   }
 
@@ -36,7 +41,11 @@ class HomeForm extends PureComponent {
   };
 
   render() {
-    const { searchTerm, location, date } = this.state;
+    const {
+      searchTerm,
+      location,
+      // date
+    } = this.state;
     return (
       <Form layout="vertical" onSubmit={this.handleSubmit}>
         <FormItem label="Event">
@@ -55,7 +64,7 @@ class HomeForm extends PureComponent {
             {({ locationDataSource }) => (
               <AutoComplete
                 size="large"
-                placeholder="City"
+                placeholder="Location"
                 data="location"
                 value={location}
                 backfill
@@ -65,7 +74,7 @@ class HomeForm extends PureComponent {
             )}
           </Consumer>
         </FormItem>
-        <FormItem label="Date">
+        {/* <FormItem label="Date">
           <DatePicker
             placeholder="Anytime"
             size="large"
@@ -75,7 +84,7 @@ class HomeForm extends PureComponent {
             format="DD.MM.YYYY"
             onChange={this.handleDateChange}
           />
-        </FormItem>
+        </FormItem> */}
         <FormItem>
           <Button
             type="primary"
@@ -83,6 +92,8 @@ class HomeForm extends PureComponent {
             htmlType="submit"
             style={{ width: `${100}%` }}
             icon="search"
+            disabled={!this.state.searchTerm}
+            ghost={!this.state.location}
           >
             Search
           </Button>

@@ -25,12 +25,13 @@ Recruitment task for Skygate
 * [Eslint](https://github.com/eslint/eslint) with [Airbnb config](https://github.com/airbnb/javascript) + [Prettier](https://github.com/prettier/prettier) ✨ to keep code nice and clean
 * [Moment](https://github.com/moment/moment) ⏱ for date manipulation
 * [Jest](https://github.com/facebook/jest) 📝 for testing
-* [Firebase](https://www.npmjs.com/package/firebase) 🔥 for database
+* ~~Firebase~~ [localForage](https://github.com/localForage/localForage) 🔥 for database
+* 
 * [Ant Design](https://ant.design/) 🐜 for UI
 * [react-transition-group](https://github.com/reactjs/react-transition-group) 🚀 for transitions
 
 ##### Todo
-* Firebase integration  
+* localForage integration  
 * `Home` view:
   * search
   * upcoming events
@@ -38,9 +39,6 @@ Recruitment task for Skygate
 * `BrowseEvents` view:
     * sort and filter
     events by search term and category
-* `CreateEventForm`:
-  * send data database
-* `Event` view:
-  * range indicator that shows how far is event from user (localization access prompt)
 * `MainMenu` responsiveness
 * Rework `CreateEventForm` image uploading process, now doesn't work well for large images (1MB or more)
+* Form validation other than HTML5's native

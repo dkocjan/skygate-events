@@ -21,7 +21,7 @@ class Store extends Component {
           name: 'Skygate React Workshops',
           description: 'lorem ipsum',
           date: '2018-07-13',
-          location: 'Gliwice',
+          location: 'Gliwice, Rynek 6',
           category: 'Software Development',
           img: 'https://placeimg.com/640/480/tech',
         },
@@ -84,7 +84,7 @@ class Store extends Component {
           name: 'Skygate Internship 2018',
           description: 'Gliwice',
           date: '2018-07-02',
-          location: 'Gliwice',
+          location: 'Gliwice, Rynek 6',
           category: 'Software Development',
           img: 'https://placeimg.com/640/480/animals',
         },
@@ -113,12 +113,19 @@ class Store extends Component {
     }));
   };
 
+  deleteEvent = eventId => {
+    const array = [...this.state.events];
+    const index = array.findIndex(event => eventId === event.id);
+    array.splice(index, 1);
+    this.setState({ events: array });
+  };
+
   render() {
     // data
     const { categories, events, locationDataSource } = this.state;
 
     // actions
-    const { createEvent } = this;
+    const { createEvent, deleteEvent } = this;
 
     return (
       <StoreContext.Provider
@@ -130,6 +137,7 @@ class Store extends Component {
 
           // actions
           createEvent,
+          deleteEvent,
         }}
       >
         {this.props.children}
