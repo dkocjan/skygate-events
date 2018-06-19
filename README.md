@@ -32,17 +32,15 @@ Recruitment task for Skygate
 ##### Todo
 * Firebase integration  
 * `Home` view:
-  * search - search from `BrowseEvents` view
+  * search
   * upcoming events
+  * search events by name, data and location
 * `BrowseEvents` view:
-    * search events by name, data and location
     * sort and filter
     events by search term and category
-* `CreateEvent` view:
-		* send data database
+* `CreateEventForm`:
+  * send data database
 * `Event` view:
-  * event view with every information about event
-  * google maps with localization
-  * range indicator that shows how far is event from you (localization access prompt)
+  * range indicator that shows how far is event from user (localization access prompt)
 * `MainMenu` responsiveness
 * Rework `CreateEventForm` image uploading process, now doesn't work well for large images (1MB or more)
