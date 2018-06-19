@@ -29,11 +29,11 @@ const beforeUpload = file => {
   if (!isJPG) {
     message.error('You can only upload JPG file!');
   }
-  const isLt2M = file.size / 1024 / 1024 < 5;
-  if (!isLt2M) {
+  const lessThan3MB = file.size / 1024 / 1024 < 3;
+  if (!lessThan3MB) {
     message.error('Image must smaller than 1MB!');
   }
-  return isJPG && isLt2M;
+  return isJPG && lessThan3MB;
 };
 
 const disabledDate = current => current && current < moment().add(-1, 'days');
