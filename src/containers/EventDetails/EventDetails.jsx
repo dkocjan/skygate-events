@@ -103,7 +103,7 @@ class EventDetails extends Component {
                 >
                   {location
                     ? `See you in ${location} at ${moment(date).format('LL')}! `
-                    : `See you ${date}! `}
+                    : `See you at ${moment(date).format('LL')}! `}
                 </p>
                 <div
                   style={{

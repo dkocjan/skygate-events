@@ -31,6 +31,8 @@ class Store extends Component {
         'Szczecin',
       ],
       filterText: '',
+      filterLocation: '',
+      filterCategory: '',
     };
   }
 
@@ -39,7 +41,7 @@ class Store extends Component {
     newEvent.id = Math.floor(Math.random() * 1000000).toString();
     newEvent.date = moment(event.date).format('YYYY-MM-DD');
     this.setState(prevState => ({
-      events: [...prevState.events, newEvent],
+      events: [newEvent, ...prevState.events],
     }));
   };
 
@@ -50,16 +52,37 @@ class Store extends Component {
     this.setState({ events: array });
   };
 
-  filterTextChange = e => {
-    this.setState({ filterText: e.target.value });
+  filterTextChange = filterText => {
+    this.setState({ filterText });
+  };
+
+  filterLocationChange = filterLocation => {
+    this.setState({ filterLocation });
+  };
+
+  filterCategoryChange = filterCategory => {
+    this.setState({ filterCategory });
   };
 
   render() {
     // data
-    const { categories, events, locationDataSource, filterText } = this.state;
+    const {
+      categories,
+      events,
+      locationDataSource,
+      filterText,
+      filterLocation,
+      filterCategory,
+    } = this.state;
 
     // actions
-    const { createEvent, deleteEvent, filterTextChange } = this;
+    const {
+      createEvent,
+      deleteEvent,
+      filterTextChange,
+      filterLocationChange,
+      filterCategoryChange,
+    } = this;
 
     return (
       <StoreContext.Provider
@@ -69,11 +92,15 @@ class Store extends Component {
           events,
           locationDataSource,
           filterText,
+          filterLocation,
+          filterCategory,
 
           // actions
           createEvent,
           deleteEvent,
           filterTextChange,
+          filterLocationChange,
+          filterCategoryChange,
         }}
       >
         {this.props.children}

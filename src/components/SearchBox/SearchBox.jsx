@@ -8,7 +8,7 @@ class SearchBox extends PureComponent {
     return (
       <Search
         placeholder={this.props.placeholderText}
-        onChange={this.props.onInputChange}
+        onChange={e => this.props.onInputChange(e.target.value)}
         style={{ width: '100%' }}
       />
     );

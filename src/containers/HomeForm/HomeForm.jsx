@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
 import {
   Form,
   Input,
@@ -51,21 +50,28 @@ class HomeForm extends PureComponent {
       // date
     } = this.state;
     return (
-      <Form layout="vertical" onSubmit={this.handleSubmit}>
-        <FormItem label="Event">
-          <Input
-            autoFocus
-            size="large"
-            type="text"
-            placeholder="Search events"
-            data="searchTerm"
-            value={searchTerm}
-            onChange={this.handleInputChange}
-          />
-        </FormItem>
-        <FormItem label="Location">
-          <Consumer>
-            {({ locationDataSource }) => (
+      <Consumer>
+        {({ filterTextChange, filterLocationChange, locationDataSource }) => (
+          <Form
+            layout="vertical"
+            onSubmit={e => {
+              this.handleSubmit(e);
+              filterTextChange(this.state.searchTerm);
+              filterLocationChange(this.state.location);
+            }}
+          >
+            <FormItem label="Event">
+              <Input
+                autoFocus
+                size="large"
+                type="text"
+                placeholder="Search events"
+                data="searchTerm"
+                value={searchTerm}
+                onChange={this.handleInputChange}
+              />
+            </FormItem>
+            <FormItem label="Location">
               <AutoComplete
                 size="large"
                 placeholder="Location"
@@ -75,10 +81,8 @@ class HomeForm extends PureComponent {
                 dataSource={locationDataSource.map(renderAutocompleteOption)}
                 onChange={this.handleLocationChange}
               />
-            )}
-          </Consumer>
-        </FormItem>
-        {/* <FormItem label="Date">
+            </FormItem>
+            {/* <FormItem label="Date">
           <DatePicker
             placeholder="Anytime"
             size="large"
@@ -89,19 +93,21 @@ class HomeForm extends PureComponent {
             onChange={this.handleDateChange}
           />
         </FormItem> */}
-        <FormItem>
-          <Button
-            type="primary"
-            size="large"
-            htmlType="submit"
-            style={{ width: `${100}%` }}
-            icon="search"
-            disabled={!this.state.searchTerm}
-          >
-            Search
-          </Button>
-        </FormItem>
-      </Form>
+            <FormItem>
+              <Button
+                type="primary"
+                size="large"
+                htmlType="submit"
+                style={{ width: `${100}%` }}
+                icon="search"
+                ghost={!this.state.searchTerm && !this.state.location}
+              >
+                Search
+              </Button>
+            </FormItem>
+          </Form>
+        )}
+      </Consumer>
     );
   }
 }

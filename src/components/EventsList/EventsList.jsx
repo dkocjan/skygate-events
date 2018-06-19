@@ -1,14 +1,28 @@
 import React from 'react';
-import { Row, Col } from 'antd';
+import { Row, Col, AutoComplete, Button } from 'antd';
 import { Link } from 'react-router-dom';
 
 import { Consumer } from '../../store';
 import EventCard from '../EventCard';
 import SearchBox from '../SearchBox/SearchBox';
+import renderAutocompleteOption from '../../utils/renderAutocompleteOption';
 
 const EventsList = () => (
   <Consumer>
-    {({ events, filterText, filterTextChange }) => (
+    {({
+      // data
+      events,
+      categories,
+      filterText,
+      filterLocation,
+      filterCategory,
+      locationDataSource,
+
+      // actions
+      filterTextChange,
+      filterLocationChange,
+      filterCategoryChange,
+    }) => (
       <Row>
         <Col
           xs={{ span: 24 }}
@@ -20,22 +34,84 @@ const EventsList = () => (
             gutter={{ xs: 16, sm: 16, md: 24 }}
             style={{ padding: '16px', marginBottom: '32px' }}
           >
-            <Col>
+            <Col
+              xs={{ span: 24 }}
+              sm={{ span: 24 }}
+              lg={{ span: 8 }}
+              style={{ margin: '4px 0' }}
+            >
               <SearchBox
                 placeholderText="Search events"
                 onInputChange={filterTextChange}
               />
             </Col>
+            <Col
+              xs={{ span: 24 }}
+              sm={{ span: 12 }}
+              lg={{ span: 8 }}
+              style={{ margin: '4px 0' }}
+            >
+              <AutoComplete
+                style={{ width: '100%' }}
+                placeholder="Location"
+                value={filterLocation}
+                backfill
+                dataSource={locationDataSource.map(renderAutocompleteOption)}
+                onChange={filterLocationChange}
+              />
+            </Col>
+            <Col
+              xs={{ span: 24 }}
+              sm={{ span: 12 }}
+              lg={{ span: 8 }}
+              style={{ margin: '4px 0' }}
+            >
+              <AutoComplete
+                style={{ width: '100%' }}
+                placeholder="Category"
+                value={filterCategory}
+                backfill
+                dataSource={categories.map(renderAutocompleteOption)}
+                onChange={filterCategoryChange}
+              />
+            </Col>
+            <Col xs={{ span: 24 }} style={{ paddingTop: '2px' }}>
+              <Button
+                type="ghost"
+                style={{ width: '100%' }}
+                icon="close"
+                onClick={e => {
+                  e.preventDefault();
+                  filterTextChange('');
+                  filterLocationChange('');
+                  filterCategoryChange('');
+                }}
+              >
+                Clear form
+              </Button>
+            </Col>
           </Row>
-          <Row gutter={{ xs: 16, sm: 16, md: 24 }} style={{ padding: '16px' }}>
+          <Row
+            gutter={{ xs: 16, sm: 16, md: 24 }}
+            style={{ padding: '0 16px' }}
+          >
             {events
-              .reverse()
               .filter(
                 event =>
-                  event.name
-                    .concat(` ${event.location}`)
+                  event.name.toLowerCase().indexOf(filterText.toLowerCase()) !==
+                  -1
+              )
+              .filter(
+                event =>
+                  event.location
                     .toLowerCase()
-                    .indexOf(filterText.toLowerCase()) !== -1
+                    .indexOf(filterLocation.toLowerCase()) !== -1
+              )
+              .filter(
+                event =>
+                  event.category
+                    .toLowerCase()
+                    .indexOf(filterCategory.toLowerCase()) !== -1
               )
               .map(event => (
                 <Col
