@@ -1,6 +1,5 @@
 import React from 'react';
 import { Row, Col, Divider } from 'antd';
-import 'react-placeholder/lib/reactPlaceholder.css';
 
 import Hero from '../../components/Hero';
 import HomeForm from '../../containers/HomeForm/index';
