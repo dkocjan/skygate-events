@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col, Icon } from 'antd';
+import { Row, Col, Icon, Divider } from 'antd';
 
 import { Consumer } from '../../store';
 import EventDetails from '../../containers/EventDetails';
@@ -31,11 +31,18 @@ class Event extends PureComponent {
     return (
       <Consumer>
         {({ events }) => {
-          const index = events.findIndex(event => event.id === id);
-          return index !== -1 ? (
-            <EventDetails event={events[index]} />
-          ) : (
-            <EventNotFound notFoundId={id} />
+          if (events) {
+            const index = events.findIndex(event => event.id === id);
+            return index !== -1 ? (
+              <EventDetails event={events[index]} />
+            ) : (
+              <EventNotFound notFoundId={id} />
+            );
+          }
+          return (
+            <Divider>
+              <Icon type="loading" />
+            </Divider>
           );
         }}
       </Consumer>

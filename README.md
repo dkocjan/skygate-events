@@ -28,7 +28,6 @@ Recruitment task for Skygate
 * [react-transition-group](https://github.com/reactjs/react-transition-group) 🚀 for transitions
 
 ##### Todo
-* localForage integration  
+* Tests
 * `MainMenu` responsiveness
-* Rework `CreateEventForm` image uploading process, now it doesn't work well for large images (1MB or more)
 * Form validation other than HTML5's native

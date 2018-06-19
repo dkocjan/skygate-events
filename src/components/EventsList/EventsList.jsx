@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, AutoComplete, Button } from 'antd';
+import { Row, Col, AutoComplete, Button, Divider, Icon } from 'antd';
 import { Link } from 'react-router-dom';
 
 import { Consumer } from '../../store';
@@ -96,40 +96,44 @@ const EventsList = () => (
             gutter={{ xs: 16, sm: 16, md: 24 }}
             style={{ padding: '0 16px' }}
           >
-            {!loadingEvents
-              ? events
-                  .filter(
-                    event =>
-                      event.name
-                        .toLowerCase()
-                        .indexOf(filterText.toLowerCase()) !== -1
-                  )
-                  .filter(
-                    event =>
-                      event.location
-                        .toLowerCase()
-                        .indexOf(filterLocation.toLowerCase()) !== -1
-                  )
-                  .filter(
-                    event =>
-                      event.category
-                        .toLowerCase()
-                        .indexOf(filterCategory.toLowerCase()) !== -1
-                  )
-                  .map(event => (
-                    <Col
-                      key={event.id || event.date}
-                      xs={{ span: 24 }}
-                      sm={{ span: 12 }}
-                      md={{ span: 12 }}
-                      lg={{ span: 8 }}
-                    >
-                      <Link to={`/event/${event.id}`}>
-                        <EventCard event={event} />
-                      </Link>
-                    </Col>
-                  ))
-              : 'Loading events'}
+            {!loadingEvents ? (
+              events
+                .filter(
+                  event =>
+                    event.name
+                      .toLowerCase()
+                      .indexOf(filterText.toLowerCase()) !== -1
+                )
+                .filter(
+                  event =>
+                    event.location
+                      .toLowerCase()
+                      .indexOf(filterLocation.toLowerCase()) !== -1
+                )
+                .filter(
+                  event =>
+                    event.category
+                      .toLowerCase()
+                      .indexOf(filterCategory.toLowerCase()) !== -1
+                )
+                .map(event => (
+                  <Col
+                    key={event.id || event.date}
+                    xs={{ span: 24 }}
+                    sm={{ span: 12 }}
+                    md={{ span: 12 }}
+                    lg={{ span: 8 }}
+                  >
+                    <Link to={`/event/${event.id}`}>
+                      <EventCard event={event} />
+                    </Link>
+                  </Col>
+                ))
+            ) : (
+              <Divider>
+                <Icon type="loading" />
+              </Divider>
+            )}
           </Row>
         </Col>
       </Row>
