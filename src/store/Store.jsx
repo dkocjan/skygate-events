@@ -1,8 +1,11 @@
 import React, { Component, createContext } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import localforage from 'localforage';
 
 import dummyData from './dummyData';
+
+localforage.setDriver([localforage.INDEXEDDB]);
 
 const StoreContext = createContext();
 
@@ -17,18 +20,16 @@ class Store extends Component {
         'Software Development',
         'Party',
       ],
-      events: dummyData,
+      events: null,
+      loadingEvents: true,
       locationDataSource: [
         'Gliwice',
         'Katowice',
         'Kraków',
-        'Wrocław',
         'Warszawa',
         'Poznań',
-        'Trójmiasto',
+        'Wrocław',
         'Łódź',
-        'Częstochowa',
-        'Szczecin',
       ],
       filterText: '',
       filterLocation: '',
@@ -36,20 +37,64 @@ class Store extends Component {
     };
   }
 
+  componentWillMount() {
+    localforage.keys().then(keys => {
+      if (keys.length === 0 || !keys) {
+        localforage.getItem('0', val => {
+          if (!val) {
+            const events = [];
+
+            const start = async () => {
+              await dummyData.forEach(e => {
+                localforage.setItem(e.id, e, event => console.log(event));
+              });
+              localforage
+                .iterate(event => {
+                  events.push(event);
+                })
+                .then(() => {
+                  this.setState({ events });
+                });
+            };
+
+            start();
+          }
+          console.log('dummyData injected');
+        });
+      }
+    });
+  }
+
+  componentDidMount() {
+    const events = [];
+
+    localforage
+      .iterate(event => {
+        events.push(event);
+      })
+      .then(() => {
+        this.setState({ events, loadingEvents: false });
+      });
+  }
+
   createEvent = event => {
     const newEvent = event;
     newEvent.id = Math.floor(Math.random() * 1000000).toString();
     newEvent.date = moment(event.date).format('YYYY-MM-DD');
-    this.setState(prevState => ({
-      events: [newEvent, ...prevState.events],
-    }));
+    localforage.setItem(newEvent.id, newEvent, () => {
+      this.setState(prevState => ({
+        events: [newEvent, ...prevState.events],
+      }));
+    });
   };
 
   deleteEvent = eventId => {
-    const array = [...this.state.events];
-    const index = array.findIndex(event => eventId === event.id);
-    array.splice(index, 1);
-    this.setState({ events: array });
+    const events = [...this.state.events];
+    const index = events.findIndex(event => eventId === event.id);
+    events.splice(index, 1);
+    localforage.removeItem(eventId, () => {
+      this.setState({ events });
+    });
   };
 
   filterTextChange = filterText => {
@@ -73,6 +118,7 @@ class Store extends Component {
       filterText,
       filterLocation,
       filterCategory,
+      loadingEvents,
     } = this.state;
 
     // actions
@@ -94,6 +140,7 @@ class Store extends Component {
           filterText,
           filterLocation,
           filterCategory,
+          loadingEvents,
 
           // actions
           createEvent,

@@ -73,8 +73,8 @@ class EventDetails extends Component {
                     size="large"
                     icon="delete"
                     onClick={e => {
-                      this.handleDelete(e);
                       deleteEvent(id);
+                      this.handleDelete(e);
                     }}
                   >
                     Delete

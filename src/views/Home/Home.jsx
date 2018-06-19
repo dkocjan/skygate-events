@@ -20,11 +20,6 @@ const Home = () => (
         <HomeForm />
       </Col>
     </Row>
-    <Row>
-      <Divider style={{ margin: '96px 0' }}>
-        <h2>Upcoming events</h2>
-      </Divider>
-    </Row>
   </div>
 );
 

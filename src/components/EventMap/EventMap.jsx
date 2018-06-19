@@ -26,19 +26,23 @@ class EventMap extends PureComponent {
     return (
       <Row>
         <Col xs={{ span: 24, offset: 0 }}>
-          <div style={{ width: '100%', height: '400px' }}>
-            <GoogleMapReact
-              bootstrapURLKeys={{ key }}
-              defaultZoom={13}
-              defaultCenter={{ lat, lng }}
-            >
-              <Marker
-                lat={lat}
-                lng={lng}
-                style={{ width: '50px', height: '50px' }}
-              />
-            </GoogleMapReact>
-          </div>
+          {key ? (
+            <div style={{ width: '100%', height: '400px' }}>
+              <GoogleMapReact
+                bootstrapURLKeys={{ key }}
+                defaultZoom={13}
+                defaultCenter={{ lat, lng }}
+              >
+                <Marker
+                  lat={lat}
+                  lng={lng}
+                  style={{ width: '50px', height: '50px' }}
+                />
+              </GoogleMapReact>
+            </div>
+          ) : (
+            'API key is not defined in .env file'
+          )}
         </Col>
       </Row>
     );

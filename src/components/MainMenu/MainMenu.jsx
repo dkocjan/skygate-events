@@ -7,7 +7,7 @@ const { Header } = Layout;
 const { Item } = Menu;
 
 const MainMenu = ({ pathname }) => (
-  <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
+  <Header style={{ position: 'fixed', zIndex: 5, width: '100%' }}>
     <Menu
       theme="dark"
       mode="horizontal"

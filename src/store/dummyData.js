@@ -80,7 +80,7 @@ You are more than welcome!`,
     description:
       'Russian blue savannah or american bobtail abyssinian or bombay or persian jaguar. Thai scottish fold, so american shorthair but british shorthair for bengal so egyptian mau. Egyptian mau bombay but tabby. Bengal savannah or kitty tom. Kitten american bobtail yet british shorthair yet abyssinian or birman but savannah. Munchkin mouser so tiger norwegian forest. Kitten havana brown yet devonshire rex yet lynx persian so cheetah cheetah. Persian. Malkin malkin yet british shorthair. Jaguar. Leopard american bobtail and siamese so savannah so tabby singapura. Sphynx ragdoll. Munchkin cheetah and manx but tabby for norwegian forest sphynx. Tiger sphynx so british shorthair. Tom siamese. Donskoy panther yet siberian but savannah and american bobtail and jaguar. Ocelot havana brown but lion sphynx. Devonshire rex thai balinese . Russian blue bengal abyssinian so british shorthair. Cheetah norwegian forest but mouser grimalkin norwegian forest puma himalayan. Cornish rex russian blue so singapura malkin for lynx thai cornish rex. Malkin leopard ocicat yet grimalkin singapura or turkish angora. British shorthair thai and birman yet jaguar, bengal. Scottish fold. American shorthair tiger egyptian mau american bobtail, panther abyssinian and jaguar. ',
     date: '2018-07-05',
-    location: 'Szczecin',
+    location: 'Wrocław',
     category: 'Science & Tech',
     img: 'https://placeimg.com/640/480/animals',
   },

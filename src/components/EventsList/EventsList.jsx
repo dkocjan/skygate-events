@@ -17,6 +17,7 @@ const EventsList = () => (
       filterLocation,
       filterCategory,
       locationDataSource,
+      loadingEvents,
 
       // actions
       filterTextChange,
@@ -95,37 +96,40 @@ const EventsList = () => (
             gutter={{ xs: 16, sm: 16, md: 24 }}
             style={{ padding: '0 16px' }}
           >
-            {events
-              .filter(
-                event =>
-                  event.name.toLowerCase().indexOf(filterText.toLowerCase()) !==
-                  -1
-              )
-              .filter(
-                event =>
-                  event.location
-                    .toLowerCase()
-                    .indexOf(filterLocation.toLowerCase()) !== -1
-              )
-              .filter(
-                event =>
-                  event.category
-                    .toLowerCase()
-                    .indexOf(filterCategory.toLowerCase()) !== -1
-              )
-              .map(event => (
-                <Col
-                  key={event.id || event.date}
-                  xs={{ span: 24 }}
-                  sm={{ span: 12 }}
-                  md={{ span: 12 }}
-                  lg={{ span: 8 }}
-                >
-                  <Link to={`/event/${event.id}`}>
-                    <EventCard event={event} />
-                  </Link>
-                </Col>
-              ))}
+            {!loadingEvents
+              ? events
+                  .filter(
+                    event =>
+                      event.name
+                        .toLowerCase()
+                        .indexOf(filterText.toLowerCase()) !== -1
+                  )
+                  .filter(
+                    event =>
+                      event.location
+                        .toLowerCase()
+                        .indexOf(filterLocation.toLowerCase()) !== -1
+                  )
+                  .filter(
+                    event =>
+                      event.category
+                        .toLowerCase()
+                        .indexOf(filterCategory.toLowerCase()) !== -1
+                  )
+                  .map(event => (
+                    <Col
+                      key={event.id || event.date}
+                      xs={{ span: 24 }}
+                      sm={{ span: 12 }}
+                      md={{ span: 12 }}
+                      lg={{ span: 8 }}
+                    >
+                      <Link to={`/event/${event.id}`}>
+                        <EventCard event={event} />
+                      </Link>
+                    </Col>
+                  ))
+              : 'Loading events'}
           </Row>
         </Col>
       </Row>

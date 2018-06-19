@@ -24,19 +24,11 @@ Recruitment task for Skygate
 * [Moment](https://github.com/moment/moment) ⏱ for date manipulation
 * [Jest](https://github.com/facebook/jest) 📝 for testing
 * ~~Firebase~~ [localForage](https://github.com/localForage/localForage) 🔥 for database
-* 
 * [Ant Design](https://ant.design/) 🐜 for UI
 * [react-transition-group](https://github.com/reactjs/react-transition-group) 🚀 for transitions
 
 ##### Todo
 * localForage integration  
-* `Home` view:
-  * search
-  * upcoming events
-  * search events by name, data and location
-* `BrowseEvents` view:
-    * sort and filter
-    events by search term and category
 * `MainMenu` responsiveness
-* Rework `CreateEventForm` image uploading process, now doesn't work well for large images (1MB or more)
+* Rework `CreateEventForm` image uploading process, now it doesn't work well for large images (1MB or more)
 * Form validation other than HTML5's native
