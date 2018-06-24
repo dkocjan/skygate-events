@@ -1,5 +1,6 @@
 {
   "name": "skygate-events",
+  "proxy": "https://maps.googleapis.com/",
   "homepage": "http://dkocjan.github.io/skygate-events/",
   "version": "0.1.0",
   "dependencies": {
