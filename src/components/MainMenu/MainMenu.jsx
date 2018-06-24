@@ -14,19 +14,19 @@ const MainMenu = ({ pathname }) => (
       defaultSelectedKeys={[pathname]}
       style={{ lineHeight: '64px' }}
     >
-      <Item key="/">
-        <Link to="/">
+      <Item key="/skygate-events/">
+        <Link to="/skygate-events/">
           <span className="nav-text">SkyEvents</span>
         </Link>
       </Item>
-      <Item key="/events">
-        <Link to="/events">
+      <Item key="/skygate-events/events">
+        <Link to="/skygate-events/events">
           <Icon type="team" />
           <span className="nav-text">Browse</span>
         </Link>
       </Item>
-      <Item key="/create">
-        <Link to="/create">
+      <Item key="/skygate-events/create">
+        <Link to="/skygate-events/create">
           <Icon type="form" />
           <span className="nav-text">Create</span>
         </Link>

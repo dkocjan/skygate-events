@@ -5,10 +5,19 @@ import Event from '../views/Event';
 
 const indexRoutes = [
   { path: '/', name: 'Home', component: Home },
-  { path: '/events', name: 'Browse Events', component: BrowseEvents },
-  { path: '/create', name: 'Create Event', component: CreateEvent },
+  { path: '/skygate-events/', name: 'Home', component: Home },
   {
-    path: '/event/:id',
+    path: '/skygate-events/events',
+    name: 'Browse Events',
+    component: BrowseEvents,
+  },
+  {
+    path: '/skygate-events/create',
+    name: 'Create Event',
+    component: CreateEvent,
+  },
+  {
+    path: '/skygate-events/event/:id',
     name: 'Event',
     component: Event,
   },

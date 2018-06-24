@@ -40,7 +40,7 @@ class HomeForm extends PureComponent {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.history.push(`/events`);
+    this.props.history.push(`/skygate-events/events`);
   };
 
   render() {

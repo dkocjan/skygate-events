@@ -36,7 +36,7 @@ class EventDetails extends Component {
 
   handleDelete(e) {
     e.preventDefault();
-    this.props.history.push('/events');
+    this.props.history.push('/skygate-events/events');
   }
 
   render() {
@@ -60,7 +60,7 @@ class EventDetails extends Component {
                   location ? `, ${location}` : ''
                 }`}
                 actions={[
-                  <Link to="/events">
+                  <Link to="/skygate-events/events">
                     <Button type="primary" size="large" icon="arrow-left">
                       Back
                     </Button>

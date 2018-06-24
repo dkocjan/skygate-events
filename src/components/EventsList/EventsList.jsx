@@ -125,7 +125,7 @@ const EventsList = () => (
                     md={{ span: 12 }}
                     lg={{ span: 8 }}
                   >
-                    <Link to={`/event/${event.id}`}>
+                    <Link to={`/skygate-events/event/${event.id}`}>
                       <EventCard event={event} />
                     </Link>
                   </Col>

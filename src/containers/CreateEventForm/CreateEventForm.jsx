@@ -111,7 +111,7 @@ class CreateEventForm extends PureComponent {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.history.push('/events');
+    this.props.history.push('/skygate-events/events');
   };
 
   render() {
@@ -182,7 +182,6 @@ class CreateEventForm extends PureComponent {
             </FormItem>
             <FormItem label="Location">
               <AutoComplete
-                size="large"
                 placeholder="City"
                 data="location"
                 value={location}
