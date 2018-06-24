@@ -46,7 +46,7 @@ class Store extends Component {
 
             const start = async () => {
               await dummyData.forEach(e => {
-                localforage.setItem(e.id, e, event => console.log(event));
+                localforage.setItem(e.id, e);
               });
               localforage
                 .iterate(event => {
@@ -59,7 +59,6 @@ class Store extends Component {
 
             start();
           }
-          console.log('dummyData injected');
         });
       }
     });
