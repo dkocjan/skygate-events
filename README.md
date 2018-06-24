@@ -17,6 +17,10 @@ Recruitment task for Skygate
 4. `npm test` - run tests
 5. `npm build` - create build for production
 
+
+#### Google Maps on localhost
+In `package.json` add line `  "proxy": "https://maps.googleapis.com/"`
+
 #### Using
 * [React](https://reactjs.org/) with [Context API](https://reactjs.org/docs/context.html)  ❤
 * [Create React App](https://github.com/facebookincubator/create-react-app) 💎 for project bootstrapping
