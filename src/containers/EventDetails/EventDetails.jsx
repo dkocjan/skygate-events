@@ -19,19 +19,39 @@ class EventDetails extends Component {
       ...this.props.event,
       lat: null,
       lng: null,
+
+      isMounted: false,
     };
   }
 
-  async componentWillMount() {
-    if (this.state.location) {
-      const req = await axios.get(`${API_URL}${this.props.event.location}`);
-      const pos = req.data.results[0].geometry.location;
-      this.setState({ lat: pos.lat, lng: pos.lng });
-    }
+  componentDidMount() {
+    this.onMount(() => {
+      if (this.state.location) {
+        axios.get(`${API_URL}${this.props.event.location}`).then(res => {
+          const pos = res.data.results[0].geometry.location;
+          if (this.state.isMounted) {
+            this.setPosition(pos);
+          }
+        });
+      }
+    });
   }
 
   componentWillUnmount() {
-    this.setState({ lat: null, lng: null });
+    this.setState({
+      isMounted: false,
+    });
+  }
+
+  onMount = cb => {
+    this.setState({
+      isMounted: true,
+    });
+    cb();
+  };
+
+  setPosition(pos) {
+    this.setState({ lat: pos.lat, lng: pos.lng });
   }
 
   handleDelete(e) {
