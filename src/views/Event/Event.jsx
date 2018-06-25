@@ -6,11 +6,6 @@ import { Consumer } from '../../store';
 import EventDetails from '../../containers/EventDetails';
 
 class Event extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   render() {
     const EventNotFound = ({ notFoundId }) => (
       <Row

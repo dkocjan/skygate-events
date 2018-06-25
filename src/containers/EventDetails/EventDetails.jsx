@@ -113,7 +113,16 @@ class EventDetails extends Component {
                 >
                   {description}
                 </p>
-                {this.state.lat ? <EventMap coords={{ lat, lng }} /> : ''}
+                {this.state.lat && this.state.isMounted ? (
+                  <EventMap
+                    isMounted={this.state.isMounted}
+                    coords={{ lat, lng }}
+                  />
+                ) : (
+                  <Divider>
+                    <Icon type="loading" />
+                  </Divider>
+                )}
                 <p
                   style={{
                     margin: '48px 0',
