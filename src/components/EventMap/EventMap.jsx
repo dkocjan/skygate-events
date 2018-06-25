@@ -11,17 +11,15 @@ class EventMap extends PureComponent {
     const { lat, lng } = this.props.coords;
 
     const Marker = () => (
-      <div>
-        <Icon
-          type="environment"
-          style={{
-            fontSize: '50px',
-            color: '#008abd',
-            transform: 'translate(-50%, -100%)',
-            textShadow: '0 5px 5px rgba(0, 0 , 0 , .333)',
-          }}
-        />
-      </div>
+      <Icon
+        type="environment"
+        style={{
+          fontSize: '50px',
+          color: '#008abd',
+          transform: 'translate(-50%, -100%)',
+          textShadow: '0 5px 5px rgba(0, 0 , 0 , .333)',
+        }}
+      />
     );
 
     if (this.props.isMounted) {
