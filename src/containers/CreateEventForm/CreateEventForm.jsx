@@ -15,7 +15,6 @@ import {
 } from 'antd';
 
 import { Consumer } from '../../store';
-import renderAutocompleteOption from '../../utils/renderAutocompleteOption';
 import UploadButton from '../../components/UploadButton';
 
 const getBase64 = (img, callback) => {
@@ -111,10 +110,16 @@ class CreateEventForm extends PureComponent {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.history.push('/skygate-events/events');
+    this.props.history.push('/events');
   };
 
   render() {
+    const renderAutocompleteOption = item => (
+      <AutoComplete.Option key={item} text={item}>
+        {item}
+      </AutoComplete.Option>
+    );
+
     const {
       name,
       description,

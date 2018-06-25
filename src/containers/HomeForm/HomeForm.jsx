@@ -10,7 +10,6 @@ import {
 } from 'antd';
 
 import { Consumer } from '../../store';
-import renderAutocompleteOption from '../../utils/renderAutocompleteOption';
 
 const FormItem = Form.Item;
 
@@ -40,7 +39,7 @@ class HomeForm extends PureComponent {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.history.push(`/skygate-events/events`);
+    this.props.history.push(`/events`);
   };
 
   render() {
@@ -49,6 +48,14 @@ class HomeForm extends PureComponent {
       location,
       // date
     } = this.state;
+
+    const { Option } = AutoComplete;
+    const renderAutocompleteOption = item => (
+      <Option key={item} text={item}>
+        {item}
+      </Option>
+    );
+
     return (
       <Consumer>
         {({ filterTextChange, filterLocationChange, locationDataSource }) => (
