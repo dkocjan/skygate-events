@@ -17,7 +17,7 @@ const EventsList = () => {
     <Consumer>
       {({
         // data
-        events,
+        filteredEvents,
         categories,
         filterText,
         filterLocation,
@@ -26,9 +26,7 @@ const EventsList = () => {
         loadingEvents,
 
         // actions
-        filterTextChange,
-        filterLocationChange,
-        filterCategoryChange,
+        filterEvents,
       }) => (
         <Row>
           <Col
@@ -50,7 +48,7 @@ const EventsList = () => {
                 <Input
                   value={filterText}
                   placeholder="Event"
-                  onChange={e => filterTextChange(e.target.value)}
+                  onChange={e => filterEvents({ filterText: e.target.value })}
                   style={{ width: '100%' }}
                 />
               </Col>
@@ -66,7 +64,9 @@ const EventsList = () => {
                   value={filterLocation}
                   backfill
                   dataSource={locationDataSource.map(renderAutocompleteOption)}
-                  onChange={filterLocationChange}
+                  onChange={location => {
+                    filterEvents({ filterLocation: location });
+                  }}
                 />
               </Col>
               <Col
@@ -81,7 +81,9 @@ const EventsList = () => {
                   value={filterCategory}
                   backfill
                   dataSource={categories.map(renderAutocompleteOption)}
-                  onChange={filterCategoryChange}
+                  onChange={category => {
+                    filterEvents({ filterCategory: category });
+                  }}
                 />
               </Col>
               <Col xs={{ span: 24 }} style={{ paddingTop: '2px' }}>
@@ -91,9 +93,11 @@ const EventsList = () => {
                   icon="close"
                   onClick={e => {
                     e.preventDefault();
-                    filterTextChange('');
-                    filterLocationChange('');
-                    filterCategoryChange('');
+                    filterEvents({
+                      filterText: '',
+                      filterLocation: '',
+                      filterCategory: '',
+                    });
                   }}
                 >
                   Clear form
@@ -104,39 +108,20 @@ const EventsList = () => {
               gutter={{ xs: 16, sm: 16, md: 24 }}
               style={{ padding: '0 16px' }}
             >
-              {!loadingEvents ? (
-                events
-                  .filter(
-                    event =>
-                      event.name
-                        .toLowerCase()
-                        .indexOf(filterText.toLowerCase()) !== -1
-                  )
-                  .filter(
-                    event =>
-                      event.location
-                        .toLowerCase()
-                        .indexOf(filterLocation.toLowerCase()) !== -1
-                  )
-                  .filter(
-                    event =>
-                      event.category
-                        .toLowerCase()
-                        .indexOf(filterCategory.toLowerCase()) !== -1
-                  )
-                  .map(event => (
-                    <Col
-                      key={event.id || event.date}
-                      xs={{ span: 24 }}
-                      sm={{ span: 12 }}
-                      md={{ span: 12 }}
-                      lg={{ span: 8 }}
-                    >
-                      <Link to={`/event/${event.id}`}>
-                        <EventCard event={event} />
-                      </Link>
-                    </Col>
-                  ))
+              {!loadingEvents && filteredEvents ? (
+                filteredEvents.map(event => (
+                  <Col
+                    key={event.id || event.date}
+                    xs={{ span: 24 }}
+                    sm={{ span: 12 }}
+                    md={{ span: 12 }}
+                    lg={{ span: 8 }}
+                  >
+                    <Link to={`/event/${event.id}`}>
+                      <EventCard event={event} />
+                    </Link>
+                  </Col>
+                ))
               ) : (
                 <Divider>
                   <Icon type="loading" />

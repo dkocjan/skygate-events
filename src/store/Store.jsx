@@ -31,6 +31,7 @@ class Store extends Component {
         'Wrocław',
         'Łódź',
       ],
+      filteredEvents: [],
       filterText: '',
       filterLocation: '',
       filterCategory: '',
@@ -73,6 +74,7 @@ class Store extends Component {
       })
       .then(() => {
         this.setState({ events, loadingEvents: false });
+        this.filterEvents({});
       });
   }
 
@@ -96,16 +98,33 @@ class Store extends Component {
     });
   };
 
-  filterTextChange = filterText => {
-    this.setState({ filterText });
-  };
+  filterEvents = ({
+    filterText = this.state.filterText,
+    filterLocation = this.state.filterLocation,
+    filterCategory = this.state.filterCategory,
+  }) => {
+    const filteredEvents = this.state.events
+      .filter(
+        event =>
+          event.name.toLowerCase().indexOf(filterText.toLowerCase()) !== -1
+      )
+      .filter(
+        event =>
+          event.location.toLowerCase().indexOf(filterLocation.toLowerCase()) !==
+          -1
+      )
+      .filter(
+        event =>
+          event.category.toLowerCase().indexOf(filterCategory.toLowerCase()) !==
+          -1
+      );
 
-  filterLocationChange = filterLocation => {
-    this.setState({ filterLocation });
-  };
-
-  filterCategoryChange = filterCategory => {
-    this.setState({ filterCategory });
+    this.setState({
+      filterText,
+      filterLocation,
+      filterCategory,
+      filteredEvents,
+    });
   };
 
   render() {
@@ -114,6 +133,7 @@ class Store extends Component {
       categories,
       events,
       locationDataSource,
+      filteredEvents,
       filterText,
       filterLocation,
       filterCategory,
@@ -121,13 +141,7 @@ class Store extends Component {
     } = this.state;
 
     // actions
-    const {
-      createEvent,
-      deleteEvent,
-      filterTextChange,
-      filterLocationChange,
-      filterCategoryChange,
-    } = this;
+    const { createEvent, deleteEvent, filterEvents } = this;
 
     return (
       <StoreContext.Provider
@@ -136,6 +150,7 @@ class Store extends Component {
           categories,
           events,
           locationDataSource,
+          filteredEvents,
           filterText,
           filterLocation,
           filterCategory,
@@ -144,9 +159,7 @@ class Store extends Component {
           // actions
           createEvent,
           deleteEvent,
-          filterTextChange,
-          filterLocationChange,
-          filterCategoryChange,
+          filterEvents,
         }}
       >
         {this.props.children}
